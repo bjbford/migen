@@ -20,29 +20,27 @@ _io = [
     ("cpu_reset", 0, Pins("AF15"), IOStandard("LVCMOS18")),
 
     # GPIO_SW_(direction)
-    ("user_btn_c", 0, Pins("AW5"), IOStandard("LVCMOS18")),
-    ("user_btn_n", 0, Pins("AW3"), IOStandard("LVCMOS18")),
-    ("user_btn_s", 0, Pins("E8"), IOStandard("LVCMOS18")),
-    ("user_btn_w", 0, Pins("AW6"), IOStandard("LVCMOS18")),
-    ("user_btn_e", 0, Pins("AWE"), IOStandard("LVCMOS18")),
+    ("user_sw_c", 0, Pins("AW5"), IOStandard("LVCMOS18")),
+    ("user_sw_n", 0, Pins("AW3"), IOStandard("LVCMOS18")),
+    ("user_sw_s", 0, Pins("E8"), IOStandard("LVCMOS18")),
+    ("user_sw_w", 0, Pins("AW6"), IOStandard("LVCMOS18")),
+    ("user_sw_e", 0, Pins("AWE"), IOStandard("LVCMOS18")),
 
     # GPIO_DIP_SW(#)
-    ("user_dip_btn", 0, Pins("AF16"), IOStandard("LVCMOS12")),
-    ("user_dip_btn", 1, Pins("AF17"), IOStandard("LVCMOS12")),
-    ("user_dip_btn", 2, Pins("AH15"), IOStandard("LVCMOS12")),
-    ("user_dip_btn", 3, Pins("AH16"), IOStandard("LVCMOS12")),
-    ("user_dip_btn", 4, Pins("AN17"), IOStandard("LVCMOS12")),
-    ("user_dip_btn", 5, Pins("AG17"), IOStandard("LVCMOS12")),
-    ("user_dip_btn", 6, Pins("AJ15"), IOStandard("LVCMOS12")),
-    ("user_dip_btn", 7, Pins("AJ16"), IOStandard("LVCMOS12")),
+    ("user_dip_sw", 0, Pins("AF16"), IOStandard("LVCMOS12")),
+    ("user_dip_sw", 1, Pins("AF17"), IOStandard("LVCMOS12")),
+    ("user_dip_sw", 2, Pins("AH15"), IOStandard("LVCMOS12")),
+    ("user_dip_sw", 3, Pins("AH16"), IOStandard("LVCMOS12")),
+    ("user_dip_sw", 4, Pins("AN17"), IOStandard("LVCMOS12")),
+    ("user_dip_sw", 5, Pins("AG17"), IOStandard("LVCMOS12")),
+    ("user_dip_sw", 6, Pins("AJ15"), IOStandard("LVCMOS12")),
+    ("user_dip_sw", 7, Pins("AJ16"), IOStandard("LVCMOS12")),
 
     # USER_SMA_MGT_CLOCK_C_(N/P)
     ("user_sma_clock", 0,
         Subsignal("p", Pins("T32"), IOStandard("LVDS")), # Swap LVDS w/ MGTREFCLK ?
         Subsignal("n", Pins("T31"), IOStandard("LVDS"))
     ),
-    ("user_sma_clock_p", 0, Pins("T32"), IOStandard("LVCMOS18")),
-    ("user_sma_clock_n", 0, Pins("T31"), IOStandard("LVCMOS18")),
 
     #("user_sma_gpio", 0,
     #    Subsignal("p", Pins("H27"), IOStandard("LVDS")),
@@ -84,6 +82,7 @@ _io = [
 
     # UART2_(CTS/RTS)_B
     # UART2_(RXD/TXD)_FPGA_(RXD/TXD)
+    # DOUBLE CHECK RX/TX DIRECTION
     ("serial", 0,
         Subsignal("cts", Pins("AT14")),
         Subsignal("rts", Pins("AU14")),
@@ -102,13 +101,6 @@ _io = [
     #("spiflash", 1,  # clock needs to be accessed through primitive
     #    Subsignal("cs_n", Pins("T26")),
     #    Subsignal("dq", Pins("M20 L20 R21 R22")),
-    #    IOStandard("LVCMOS18")
-    #),
-
-    #("rotary", 0,
-    #    Subsignal("a", Pins("Y21")),
-    #    Subsignal("b", Pins("AD26")),
-    #    Subsignal("push", Pins("AF28")),
     #    IOStandard("LVCMOS18")
     #),
 
@@ -324,17 +316,132 @@ _connectors = [
         "DP7_C2M_N": "G3",
         "DP7_M2C_P": "F2",
         "DP7_M2C_N": "F1",
+        # FMCP_HSPC_DP8_
+        "DP8_C2M_P": "D31",
+        "DP8_C2M_N": "D32",
+        "DP8_M2C_P": "E38",
+        "DP8_M2C_N": "E39",
+        # FMCP_HSPC_DP9_
+        "DP9_C2M_P": "C33",
+        "DP9_C2M_N": "C34",
+        "DP9_M2C_P": "D36",
+        "DP9_M2C_N": "D37",
+        # FMCP_HSPC_DP10_
+        "DP10_C2M_P": "B31",
+        "DP10_C2M_N": "B32",
+        "DP10_M2C_P": "C38",
+        "DP10_M2C_N": "C39",
+        # FMCP_HSPC_DP11_
+        "DP11_C2M_P": "A33",
+        "DP11_C2M_N": "A34",
+        "DP11_M2C_P": "B36",
+        "DP11_M2C_N": "B37",
+        # FMCP_HSPC_GBTCLK0_M2C_C_(N/P)
+        "GBTCLK0_M2C_C_N": "W34",
+        "GBTCLK0_M2C_C_P": "W33",
+        # FMCP_HSPC_LA(##)_(N/P)
+        "LA33_P": "AG18",
+        "LA33_N": "AH18",
+
+        "LA32_P": "AF20",
+        "LA32_N": "AF19",
         
-        "LA06_P": "D13",
-        "LA06_N": "C13",
-        "LA10_P": "L8",
-        "LA10_N": "K8",
-        "LA14_P": "B10",
-        "LA14_N": "A10",
-        "LA18_CC_P": "E22",
-        "LA18_CC_N": "E23",
-        "LA27_P": "H21",
-        "LA27_N": "G21",
+        "LA31_P": "AJ20",
+        "LA31_N": "AJ19",
+        
+        "LA30_P": "AG20",
+        "LA30_N": "AH20",
+        
+        "LA29_P": "AK22",
+        "LA29_N": "AK21",
+        
+        "LA28_P": "AJ18",
+        "LA28_N": "AK18",
+        
+        "LA27_P": "AR21",
+        "LA27_N": "AT21",
+        
+        "LA26_P": "AR22",
+        "LA26_N": "AT22",
+        
+        "LA25_P": "AL21",
+        "LA25_N": "AL20",
+        
+        "LA24_P": "AL22",
+        "LA24_N": "AM22",
+        
+        "LA23_P": "AM18",
+        "LA23_N": "AN18",
+        
+        "LA22_P": "AR19",
+        "LA22_N": "AT19",
+        
+        "LA21_P": "AL19",
+        "LA21_N": "AM19",
+        
+        "LA20_P": "AR17",
+        "LA20_N": "AT17",
+        
+        "LA19_P": "AU20",
+        "LA19_N": "AU19",
+        
+        "LA18_P": "AM20",
+        "LA18_N": "AN20",
+        
+        "LA17_P": "AN21",
+        "LA17_N": "AP21",
+        
+        "LA16_P": "AR12",
+        "LA16_N": "AR11",
+        
+        "LA15_P": "AJ14",
+        "LA15_N": "AK14",
+        
+        "LA14_P": "AL14",
+        "LA14_N": "AM14",
+        
+        "LA13_P": "AM13",
+        "LA13_N": "AN13",
+
+        "LA12_P": "AL10",
+        "LA12_N": "AM10",
+        
+        "LA11_P": "AT10",
+        "LA11_N": "AU10",
+        
+        "LA10_P": "AM12",
+        "LA10_N": "AN12",
+        
+        "LA09_P": "AN8",
+        "LA09_N": "AN7",
+        
+        "LA08_P": "AL9",
+        "LA08_N": "AM9",
+        
+        "LA07_P": "AK13",
+        "LA07_N": "AL12",
+        
+        "LA06_P": "AL8",
+        "LA06_N": "AL7",
+        
+        "LA05_P": "AM8",
+        "LA05_N": "AM7",
+        
+        "LA04_P": "L8",
+        "LA04_N": "K8",
+
+        "LA03_P": "L8",
+        "LA03_N": "K8",
+
+        "LA02_P": "L8",
+        "LA02_N": "K8",
+
+		"LA01_P": "L8",
+        "LA01_N": "K8",
+
+        "LA00_C_P": "L8",
+        "LA00_C_N": "K8",
+
         "HA01_CC_P": "E16",
         "HA01_CC_N": "D16",
         "HA05_P": "J15",
@@ -350,27 +457,6 @@ _connectors = [
         "CLK1_M2C_P": "E25",
         "CLK1_M2C_N": "D25",
         "LA00_CC_P": "H11",
-        "LA00_CC_N": "G11",
-        "LA03_P": "A13",
-        "LA03_N": "A12",
-        "LA08_P": "J8",
-        "LA08_N": "H8",
-        "LA12_P": "E10",
-        "LA12_N": "D10",
-        "LA16_P": "B9",
-        "LA16_N": "A9",
-        "LA20_P": "B24",
-        "LA20_N": "A24",
-        "LA22_P": "G24",
-        "LA22_N": "F25",
-        "LA25_P": "D20",
-        "LA25_N": "D21",
-        "LA29_P": "B20",
-        "LA29_N": "A20",
-        "LA31_P": "B25",
-        "LA31_N": "A25",
-        "LA33_P": "A27",
-        "LA33_N": "A28",
         "HA03_P": "G15",
         "HA03_N": "G14",
         "HA07_P": "L19",
@@ -387,20 +473,6 @@ _connectors = [
         "GBTCLK1_M2C_N": "H5",
         "GBTCLK0_M2C_P": "K6",
         "GBTCLK0_M2C_N": "K5",
-        "LA01_CC_P": "G9",
-        "LA01_CC_N": "F9",
-        "LA05_P": "L13",
-        "LA05_N": "K13",
-        "LA09_P": "J9",
-        "LA09_N": "H9",
-        "LA13_P": "D9",
-        "LA13_N": "C9",
-        "LA17_CC_P": "D24",
-        "LA17_CC_N": "C24",
-        "LA23_P": "G22",
-        "LA23_N": "F22",
-        "LA26_P": "G20",
-        "LA26_N": "F20",
         "PG_M2C": "L27",
         "HA00_CC_P": "G17",
         "HA00_CC_N": "G16",
@@ -417,28 +489,6 @@ _connectors = [
         "PRSNT_M2C_B": "H24",
         "CLK0_M2C_P": "H12",
         "CLK0_M2C_N": "G12",
-        "LA02_P": "K10",
-        "LA02_N": "J10",
-        "LA04_P": "L12",
-        "LA04_N": "K12",
-        "LA07_P": "F8",
-        "LA07_N": "E8",
-        "LA11_P": "K11",
-        "LA11_N": "J11",
-        "LA15_P": "D8",
-        "LA15_N": "C8",
-        "LA19_P": "C21",
-        "LA19_N": "C22",
-        "LA21_P": "F23",
-        "LA21_N": "F24",
-        "LA24_P": "E20",
-        "LA24_N": "E21",
-        "LA28_P": "B21",
-        "LA28_N": "B22",
-        "LA30_P": "C26",
-        "LA30_N": "B26",
-        "LA32_P": "E26",
-        "LA32_N": "D26",
         "HA02_P": "H19",
         "HA02_N": "H18",
         "HA06_P": "L15",
