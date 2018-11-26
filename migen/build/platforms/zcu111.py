@@ -75,32 +75,6 @@ _io = [
         IOStandard("LVCMOS18")
 	),
 
-    #("spiflash", 0,  # clock needs to be accessed through primitive
-    #    Subsignal("cs_n", Pins("AA26")),
-    #    Subsignal("dq", Pins("AC7 AB7 AA7 Y7")),
-    #    IOStandard("LVCMOS18")
-    #),
-
-    #("spiflash", 1,  # clock needs to be accessed through primitive
-    #    Subsignal("cs_n", Pins("T26")),
-    #    Subsignal("dq", Pins("M20 L20 R21 R22")),
-    #    IOStandard("LVCMOS18")
-    #),
-
-    #("hdmi", 0,
-    #    Subsignal("d", Pins(
-    #        "AK11 AP11 AP13 AN13 AN11 AM11 AN12 AM12",
-    #        "AL12 AK12 AL13 AK13 AD11 AH12 AG12 AJ11",
-    #        "AG10 AK8")),
-    #    Subsignal("de", Pins("AE11")),
-    #    Subsignal("clk", Pins("AF13")),
-    #    Subsignal("vsync", Pins("AH13")),
-    #    Subsignal("hsync", Pins("AE13")),
-    #    Subsignal("spdif", Pins("AE12")),
-    #    Subsignal("spdif_out", Pins("AF12")),
-    #    IOStandard("LVCMOS18")
-    #),
-
     # PL_DDR4_
     ("ddram", 0,
     	# PL_DDR4_A(#)
@@ -170,63 +144,11 @@ _io = [
         Subsignal("reset_n", Pins("A17"), IOStandard("LVCMOS12")),
     ),
 
-    #("pcie_x1", 0,
-    #    Subsignal("rst_n", Pins("K22"), IOStandard("LVCMOS18")),
-    #    Subsignal("clk_p", Pins("AB6")),
-    #    Subsignal("clk_n", Pins("AB5")),
-    #    Subsignal("rx_p", Pins("AB2")),
-    #    Subsignal("rx_n", Pins("AB1")),
-    #    Subsignal("tx_p", Pins("AC3")),
-    #    Subsignal("tx_n", Pins("AC4"))
-    #),
-
-    #("pcie_x2", 0,
-    #    Subsignal("rst_n", Pins("K22"), IOStandard("LVCMOS18")),
-    #    Subsignal("clk_p", Pins("AB6")),
-    #    Subsignal("clk_n", Pins("AB5")),
-    #    Subsignal("rx_p", Pins("AB2 AD2")),
-    #    Subsignal("rx_n", Pins("AB1 AD1")),
-    #    Subsignal("tx_p", Pins("AC3 AE4")),
-    #    Subsignal("tx_n", Pins("AC4 AE3"))
-    #),
-
-    #"pcie_x4", 0,
-    #    Subsignal("rst_n", Pins("K22"), IOStandard("LVCMOS18")),
-    #    Subsignal("clk_p", Pins("AB6")),
-    #    Subsignal("clk_n", Pins("AB5")),
-    #    Subsignal("rx_p", Pins("AB2 AD2 AF2 AH2")),
-    #    Subsignal("rx_n", Pins("AB1 AD1 AF1 AH1")),
-    #    Subsignal("tx_p", Pins("AC3 AE4 AG4 AH6")),
-    #    Subsignal("tx_n", Pins("AC4 AE3 AG3 AH5"))
-    #),
-
-    #"pcie_x8", 0,
-    #    Subsignal("rst_n", Pins("K22"), IOStandard("LVCMOS18")),
-    #    Subsignal("clk_p", Pins("AB6")),
-    #    Subsignal("clk_n", Pins("AB5")),
-    #    Subsignal("rx_p", Pins("AB2 AD2 AF2 AH2 AJ4 AK2 AM2 AP2")),
-    #    Subsignal("rx_n", Pins("AB1 AD1 AF1 AH1 AJ3 AK1 AM1 AP1")),
-    #    Subsignal("tx_p", Pins("AC3 AE4 AG4 AH6 AK6 AL4 AM6 AN4")),
-    #    Subsignal("tx_n", Pins("AC4 AE3 AG3 AH5 AK5 AL3 AM5 AN3"))
-    #),
-
-    #("sgmii_clock", 0,
-    #    Subsignal("p", Pins("P26"), IOStandard("LVDS_25")),
-    #    Subsignal("n", Pins("N26"), IOStandard("LVDS_25"))
-    #),
-
-    #("user_sma_mgt_refclk", 0,
-    #    Subsignal("p", Pins("V6")),
-    #    Subsignal("n", Pins("V5"))
-    #),
-    #("user_sma_mgt_tx", 0,
-    #    Subsignal("p", Pins("R4")),
-    #    Subsignal("n", Pins("R3"))
-    #),
-    #("user_sma_mgt_rx", 0,
-    #    Subsignal("p", Pins("P2")),
-    #    Subsignal("n", Pins("P1"))
-    #),
+    # USER_SMA_MGT_CLOCK_(N/P)
+    ("user_sma_mgt_clk", 0,
+        Subsignal("p", Pins("T31")),
+        Subsignal("n", Pins("T32"))
+    ),
 
     # SFP(#)_RX_(N/P)
     ("sfp_rx", 0,
@@ -291,7 +213,6 @@ _io = [
 
 	# SFP_SI5382_CLK_IN_SEL
     ("sfp_si5382_in1_c", 0, Pins("E39"), IOStandard("LVCMOS18")),
-
 ]
 
 # Above each section is listed the format for how to Ctrl-F to that 
