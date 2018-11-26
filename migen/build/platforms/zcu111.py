@@ -137,34 +137,37 @@ _io = [
 
         # PL_DDR4_DM(#)_B
         Subsignal("dm", Pins("G13 C12 K13 J8 C23 F21 J23 N20"),
-            IOStandard("POD12_DCI")),
+            IOStandard("POD12")),
 
         # PL_DDR4_DQ(#)
         Subsignal("dq", Pins(
-            "D14 A14 F14 F12 E14 AD20 AG22 AE20",
-            "AJ24 AG24 AJ23 AF23 AH23 AF24 AH22 AG25",
+            "D14 A14 F14 F12 E14 H12 G14 H13", # 0 -> 7
+            "B13 A15 A12 A14 D13 B14 A11 C13", # 8 -> 15
     
-            "AL22 AL25 AM20 AK23 AK22 AL20 AL24 AL23",
-            "AM24 AN23 AN24 AP23 AP25 AN22 AP24 AM22",
+            "K11 J11 H10 F11 K10 F10 J10 H11", # 16 -> 23
+            "G9  G7  F9  G6  H6  H7  J9  K9", # 24 -> 31
     
-            "AH28 AK26 AK28 AM27 AJ28 AH27 AK27 AM26",
-            "AL30 AP29 AM30 AN28 AL29 AP28 AM29 AN27",
+            "C22 A20 A21 C21 A24 B20 B24 C20", # 32 -> 39
+            "E24 E22 E23 G20 F24 E21 F20 D21", # 40 -> 47
     
-            "AH31 AH32 AJ34 AK31 AJ31 AJ30 AH34 AK32",
-            "AN33 AP33 AM34 AP31 AM32 AN31 AL34 AN32",
-           ),
-            IOStandard("POD12_DCI")),
-        Subsignal("dqs_p", Pins("AG21 AH24 AJ20 AP20 AL27 AN29 AH33 AN34"),
-            IOStandard("DIFF_POD12")),
-        Subsignal("dqs_n", Pins("AH21 AJ25 AK20 AP21 AL28 AP30 AJ33 AP34"),
-            IOStandard("DIFF_POD12")),
-        Subsignal("clk_p", Pins("AE16"), IOStandard("DIFF_SSTL2_DCI")),
-        Subsignal("clk_n", Pins("AE15"), IOStandard("DIFF_SSTL2_DCI")),
-        Subsignal("cke", Pins("AD15"), IOStandard("SSTL12_DCI")),
-        Subsignal("odt", Pins("AJ18"), IOStandard("SSTL12_DCI")),
-        Subsignal("reset_n", Pins("AL18"), IOStandard("LVCMOS12")),
+            "H23 G23 K24 G22 J21 H22 L24 H21", # 48 -> 55
+            "L23 L20 L22 L21 M20 L19 M19 N19", # 56 -> 63
+           ), IOStandard("POD12")),
 
-        Misc("SLEW=FAST"),
+        # PL_DDR4_DQS(#)_T
+        Subsignal("dqs_t", Pins("E13 C15 J14 H8 B22 D23 J20 K21 K22"), IOStandard("DIFF_POD12")),
+        
+        # PL_DDR4_DQS(#)_C
+        Subsignal("dqs_c", Pins("E12 B15 J13 G8 A22 D24 H20"), IOStandard("DIFF_POD12")),
+        
+        # PL_DDR4_CKE
+        Subsignal("cke", Pins("A16"), IOStandard("SSTL12")),
+
+        # PL_DDR4_ODT
+        Subsignal("odt", Pins("B19"), IOStandard("SSTL12")),
+
+        # PL_DDR4_RESET_B
+        Subsignal("reset_n", Pins("A17"), IOStandard("LVCMOS12")),
     ),
 
     #("pcie_x1", 0,
