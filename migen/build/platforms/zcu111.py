@@ -27,14 +27,14 @@ _io = [
     ("user_sw_e", 0, Pins("AWE"), IOStandard("LVCMOS18")),
 
     # GPIO_DIP_SW(#)
-    ("user_dip_sw", 0, Pins("AF16"), IOStandard("LVCMOS12")),
-    ("user_dip_sw", 1, Pins("AF17"), IOStandard("LVCMOS12")),
-    ("user_dip_sw", 2, Pins("AH15"), IOStandard("LVCMOS12")),
-    ("user_dip_sw", 3, Pins("AH16"), IOStandard("LVCMOS12")),
-    ("user_dip_sw", 4, Pins("AN17"), IOStandard("LVCMOS12")),
-    ("user_dip_sw", 5, Pins("AG17"), IOStandard("LVCMOS12")),
-    ("user_dip_sw", 6, Pins("AJ15"), IOStandard("LVCMOS12")),
-    ("user_dip_sw", 7, Pins("AJ16"), IOStandard("LVCMOS12")),
+    ("user_dip_sw", 0, Pins("AF16"), IOStandard("LVCMOS18")),
+    ("user_dip_sw", 1, Pins("AF17"), IOStandard("LVCMOS18")),
+    ("user_dip_sw", 2, Pins("AH15"), IOStandard("LVCMOS18")),
+    ("user_dip_sw", 3, Pins("AH16"), IOStandard("LVCMOS18")),
+    ("user_dip_sw", 4, Pins("AN17"), IOStandard("LVCMOS18")),
+    ("user_dip_sw", 5, Pins("AG17"), IOStandard("LVCMOS18")),
+    ("user_dip_sw", 6, Pins("AJ15"), IOStandard("LVCMOS18")),
+    ("user_dip_sw", 7, Pins("AJ16"), IOStandard("LVCMOS18")),
 
     # USER_SMA_MGT_CLOCK_C_(N/P)
     ("user_sma_clock", 0,
@@ -75,12 +75,60 @@ _io = [
         IOStandard("LVCMOS18")
 	),
 
+    # ADCIO_(##)
+    ("adc", 0, Pins("AP5"), IOStandard("LVCMOS18")),
+    ("adc", 1, Pins("AP6"), IOStandard("LVCMOS18")),
+    ("adc", 2, Pins("AR6"), IOStandard("LVCMOS18")),
+    ("adc", 3, Pins("AR7"), IOStandard("LVCMOS18")),
+    ("adc", 4, Pins("AV7"), IOStandard("LVCMOS18")),
+    ("adc", 5, Pins("AU7"), IOStandard("LVCMOS18")),
+    ("adc", 6, Pins("AV8"), IOStandard("LVCMOS18")),
+    ("adc", 7, Pins("AU8"), IOStandard("LVCMOS18")),
+    ("adc", 8, Pins("AT6"), IOStandard("LVCMOS18")),
+    ("adc", 9, Pins("AT7"), IOStandard("LVCMOS18")),
+    ("adc", 10, Pins("AU5"), IOStandard("LVCMOS18")),
+    ("adc", 11, Pins("AT5"), IOStandard("LVCMOS18")),
+    ("adc", 12, Pins("AU3"), IOStandard("LVCMOS18")),
+    ("adc", 13, Pins("AU4"), IOStandard("LVCMOS18")),
+    ("adc", 14, Pins("AV5"), IOStandard("LVCMOS18")),
+    ("adc", 15, Pins("AV6"), IOStandard("LVCMOS18")),
+    ("adc", 16, Pins("AU1"), IOStandard("LVCMOS18")),
+    ("adc", 17, Pins("AU2"), IOStandard("LVCMOS18")),
+    ("adc", 18, Pins("AV2"), IOStandard("LVCMOS18")),
+    ("adc", 19, Pins("AV3"), IOStandard("LVCMOS18")),
+
+    # DACIO_(##)
+    ("dac", 0, Pins("A9"), IOStandard("LVCMOS18")),
+    ("dac", 1, Pins("A10"), IOStandard("LVCMOS18")),
+    ("dac", 2, Pins("A6"), IOStandard("LVCMOS18")),
+    ("dac", 3, Pins("A7"), IOStandard("LVCMOS18")),
+    ("dac", 4, Pins("A5"), IOStandard("LVCMOS18")),
+    ("dac", 5, Pins("B5"), IOStandard("LVCMOS18")),
+    ("dac", 6, Pins("C5"), IOStandard("LVCMOS18")),
+    ("dac", 7, Pins("C6"), IOStandard("LVCMOS18")),
+    ("dac", 8, Pins("B9"), IOStandard("LVCMOS18")),
+    ("dac", 9, Pins("B10"), IOStandard("LVCMOS18")),
+    ("dac", 10, Pins("B7"), IOStandard("LVCMOS18")),
+    ("dac", 11, Pins("B8"), IOStandard("LVCMOS18")),
+    ("dac", 12, Pins("D8"), IOStandard("LVCMOS18")),
+    ("dac", 13, Pins("D9"), IOStandard("LVCMOS18")),
+    ("dac", 14, Pins("C7"), IOStandard("LVCMOS18")),
+    ("dac", 15, Pins("C8"), IOStandard("LVCMOS18")),
+    ("dac", 16, Pins("C10"), IOStandard("LVCMOS18")),
+    ("dac", 17, Pins("D10"), IOStandard("LVCMOS18")),
+    ("dac", 18, Pins("D6"), IOStandard("LVCMOS18")),
+    ("dac", 19, Pins("E7"), IOStandard("LVCMOS18")),
+
     # PL_DDR4_
     ("ddram", 0,
     	# PL_DDR4_A(#)
         Subsignal("a", Pins(
             "D18 E19 E17 E18 E16 F16 F19 G19",
             "F15 G15 G18 H18 K17 L17"), IOStandard("SSTL12")),
+        # PL_DDR4_CK0_C
+        Subsignal("ck_c", Pins("F17"), IOStandard("DIFF_POD12")),
+        # PL_DDR4_CK0_T
+        Subsignal("ck_t", Pins("G17"), IOStandard("DIFF_POD12")),
         # PL_DDR4_BA(#)
         Subsignal("ba", Pins("K18 K19"), IOStandard("SSTL12")),
         # PL_DDR4_BG0
@@ -199,6 +247,75 @@ _io = [
 
     # SFP_SI5382_CLK_IN_SEL
     ("sfp_si5382_clk_in_sel", 0, Pins("E9"), IOStandard("LVCMOS18")),
+
+    # PMOD0_(#)_LS
+    ("pmod0", 0, Pins("C17"), IOStandard("LVCMOS12")),
+    ("pmod0", 1, Pins("M18"), IOStandard("LVCMOS12")),
+    ("pmod0", 2, Pins("H16"), IOStandard("LVCMOS12")),
+    ("pmod0", 3, Pins("H17"), IOStandard("LVCMOS12")),
+    ("pmod0", 4, Pins("J16"), IOStandard("LVCMOS12")),
+    ("pmod0", 5, Pins("K16"), IOStandard("LVCMOS12")),
+    ("pmod0", 6, Pins("H15"), IOStandard("LVCMOS12")),
+    ("pmod0", 7, Pins("J15"), IOStandard("LVCMOS12")),
+
+    # PMOD1_(#)_LS
+    ("pmod1", 0, Pins("L14"), IOStandard("LVCMOS12")),
+    ("pmod1", 1, Pins("L15"), IOStandard("LVCMOS12")),
+    ("pmod1", 2, Pins("M13"), IOStandard("LVCMOS12")),
+    ("pmod1", 3, Pins("N13"), IOStandard("LVCMOS12")),
+    ("pmod1", 4, Pins("M15"), IOStandard("LVCMOS12")),
+    ("pmod1", 5, Pins("N15"), IOStandard("LVCMOS12")),
+    ("pmod1", 6, Pins("M14"), IOStandard("LVCMOS12")),
+    ("pmod1", 7, Pins("N14"), IOStandard("LVCMOS12")),
+
+    # MSP430_GPIO_PL_(#)_LS
+    ("msp430_gpio", 0, Pins("M17"), IOStandard("LVCMOS12")),
+    ("msp430_gpio", 1, Pins("N17"), IOStandard("LVCMOS12")),
+    ("msp430_gpio", 2, Pins("L12"), IOStandard("LVCMOS12")),
+    ("msp430_gpio", 3, Pins("M12"), IOStandard("LVCMOS12")),
+
+    # MSP430_UCA1_(TXD/RXD)_LS
+    ("msp430_uca_tx", 0, Pins("M17"), IOStandard("LVCMOS18")),
+    ("msp430_uca_rx", 0, Pins("L12"), IOStandard("LVCMOS18")),
+
+    # USER_SI570_(N/P)
+    ("user_si570", 0,
+    	Subsignal("p", Pins("J19")),
+    	Subsignal("n", Pins("J18"))
+	),
+
+	# VRP_(##)
+	("vrp_65", 0, Pins("AU9"), IOStandard("LVCMOSxx")),
+	("vrp_66", 0, Pins("AU22"), IOStandard("LVCMOSxx")),
+	("vrp_67", 0, Pins("K23"), IOStandard("LVCMOSxx")),
+	("vrp_68", 0, Pins("F7"), IOStandard("LVCMOSxx")),
+	("vrp_69", 0, Pins("L16"), IOStandard("LVCMOSxx")),
+
+	# SYSMON_(SCL/SDA)_LS
+	("sysmon_scl", 0, Pins("B12"), IOStandard("LVCMOS12")),
+	("sysmon_sda", 0, Pins("B11"), IOStandard("LVCMOS12")),
+
+	# SYSREF_FPGA_C_(N/P)
+	("sysref_fpga_c", 0,
+    	Subsignal("p", Pins("AK17")),
+    	Subsignal("n", Pins("AK16"))
+	),
+
+	# FPGA_REFCLK_OUT_C_(N/P)
+	("fpga_refclk_out_c", 0,
+    	Subsignal("p", Pins("AL16")),
+    	Subsignal("n", Pins("AL15"))
+	),
+
+	# AMS_FPGA_REF_CLK
+	("ams_fpga_ref_clk", 0, Pins("AP14"), IOStandard("LVCMOS18")),
+
+	# USER_MGT_SI570_CLOCK_C_(N/P)
+	("user_mgt_si570_clock_c", 0,
+    	Subsignal("p", Pins("V31")),
+    	Subsignal("n", Pins("V32"))
+	),
+
 ]
 
 # Above each section is listed the format for how to Ctrl-F to that 
@@ -207,55 +324,57 @@ _io = [
 _connectors = [
     ("FMCP_HSPC", {
 
-    	# FMCP_HSPC_DP(#)_
-        "DP0_C2M_P": "P35",
-        "DP0_C2M_N": "P36",
+    	# FMCP_HSPC_DP(#)_M2C_(N/P)
         "DP0_M2C_P": "N38",
         "DP0_M2C_N": "N39",
-        "DP1_C2M_P": "N33",
-        "DP1_C2M_N": "N34",
         "DP1_M2C_P": "M36",
         "DP1_M2C_N": "M37",
-        "DP2_C2M_P": "L33",
-        "DP2_C2M_N": "L34",
         "DP2_M2C_P": "L38",
         "DP2_M2C_N": "L39",
-        "DP3_C2M_P": "B6",
-        "DP3_C2M_N": "B5",
         "DP3_M2C_P": "A4",
         "DP3_M2C_N": "A3",
-        "DP4_C2M_P": "N4",
-        "DP4_C2M_N": "N3",
         "DP4_M2C_P": "M2",
         "DP4_M2C_N": "M1",
-        "DP5_C2M_P": "J4",
-        "DP5_C2M_N": "J3",
         "DP5_M2C_P": "H2",
         "DP5_M2C_N": "H1",
-        "DP6_C2M_P": "L4",
-        "DP6_C2M_N": "L3",
         "DP6_M2C_P": "K2",
         "DP6_M2C_N": "K1",
-        "DP7_C2M_P": "G4",
-        "DP7_C2M_N": "G3",
         "DP7_M2C_P": "F2",
         "DP7_M2C_N": "F1",
-        "DP8_C2M_P": "D31",
-        "DP8_C2M_N": "D32",
         "DP8_M2C_P": "E38",
         "DP8_M2C_N": "E39",
-        "DP9_C2M_P": "C33",
-        "DP9_C2M_N": "C34",
         "DP9_M2C_P": "D36",
         "DP9_M2C_N": "D37",
-        "DP10_C2M_P": "B31",
-        "DP10_C2M_N": "B32",
         "DP10_M2C_P": "C38",
         "DP10_M2C_N": "C39",
-        "DP11_C2M_P": "A33",
-        "DP11_C2M_N": "A34",
         "DP11_M2C_P": "B36",
         "DP11_M2C_N": "B37",
+
+        # FMCP_HSPC_DP(#)_C2M_(N/P)
+        "DP0_C2M_P": "P35",
+        "DP0_C2M_N": "P36",
+        "DP1_C2M_P": "N33",
+        "DP1_C2M_N": "N34",
+        "DP2_C2M_P": "L33",
+        "DP2_C2M_N": "L34",
+        "DP3_C2M_P": "B6",
+        "DP3_C2M_N": "B5",
+        "DP4_C2M_P": "N4",
+        "DP4_C2M_N": "N3",
+        "DP5_C2M_P": "J4",
+        "DP5_C2M_N": "J3",
+        "DP6_C2M_P": "L4",
+        "DP6_C2M_N": "L3",
+        "DP7_C2M_P": "G4",
+        "DP7_C2M_N": "G3",
+        "DP8_C2M_P": "D31",
+        "DP8_C2M_N": "D32",
+        "DP9_C2M_P": "C33",
+        "DP9_C2M_N": "C34",
+        "DP10_C2M_P": "B31",
+        "DP10_C2M_N": "B32",
+        "DP11_C2M_P": "A33",
+        "DP11_C2M_N": "A34",
 
         # FMCP_HSPC_GBTCLK0_M2C_(N/P)
         "GBTCLK0_M2C_C_N": "W34",
@@ -265,13 +384,21 @@ _connectors = [
         "GBTCLK2_M2C_C_N": "P32",
         "GBTCLK2_M2C_C_P": "P31",
 
-        # FMCP_HSPC_CLK(#)_M2C_(M/P)
+        # FMCP_HSPC_SYNC_C2M_(N/P)
+        "SYNC_C2M_N": "AT11",
+        "SYNC_C2M_P": "AT12",
+
+        # FMCP_HSPC_SYNC_M2C_(N/P)     IOSTANDARD : LVDS
+        "SYNC_M2C_N": "AV12",
+        "SYNC_M2C_P": "AU12",
+
+        # FMCP_HSPC_CLK(#)_M2C_(M/P)     IOSTANDARD : LVDS
         "CLK0_M2C_P": "AN10",
         "CLK0_M2C_N": "AP10",
         "CLK1_M2C_P": "AP20",
         "CLK1_M2C_N": "AP19",
 
-        # FMCP_HSPC_LA(##)_(N/P)
+        # FMCP_HSPC_LA(##)_(N/P)     IOSTANDARD : LVCMOS18
         "LA00_CC_P": "AP9",
         "LA00_CC_N": "AR9",
         "LA01_CC_P": "AP8",
@@ -342,6 +469,15 @@ _connectors = [
         "LA32_N": "AF19",
         "LA33_P": "AG18",
         "LA33_N": "AH18",
+
+        # FMCP_HSPC_REFCLK_M2C_(N/P)     IOSTANDARD : LVDS
+        "REFCLK_M2C_N": "AP11",
+        "REFCLK_M2C_P": "AN11",
+
+        # FMCP_HSPC_REFCLK_C2M_(N/P)     IOSTANDARD : LVDS
+        "REFCLK_M2C_N": "AW11",
+        "REFCLK_M2C_P": "AV11",
+
         }
     ),
 ]
