@@ -81,38 +81,26 @@ _io = [
         Subsignal("a", Pins(
             "D18 E19 E17 E18 E16 F16 F19 G19",
             "F15 G15 G18 H18 K17 L17"), IOStandard("SSTL12")),
-
         # PL_DDR4_BA(#)
         Subsignal("ba", Pins("K18 K19"), IOStandard("SSTL12")),
-
-        # PL_DDR4_BG(#)
+        # PL_DDR4_BG0
         Subsignal("bg", Pins("C16"), IOStandard("SSTL12")),
-
         # PL_DDR4_RAS_B
         Subsignal("ras_n", Pins("C18"), IOStandard("SSTL12")),
-
         # PL_DDR4_CAS_B
         Subsignal("cas_n", Pins("D15"), IOStandard("SSTL12")),
-
         # PL_DDR4_WE_B
         Subsignal("we_n", Pins("B17"), IOStandard("SSTL12")),
-
         # PL_DDR4_CS_B
         Subsignal("cs_n", Pins("D16"), IOStandard("SSTL12")),
-
         # PL_DDR4_ACT_B
         Subsignal("act_n", Pins("A19"), IOStandard("SSTL12")),
-
         # PL_DDR4_ALERT_B
         Subsignal("alert_n", Pins("B18"), IOStandard("POD12")),
-
         # PL_DDR4_PARITY
         Subsignal("par", Pins("D19"), IOStandard("POD12")),
-
         # PL_DDR4_DM(#)_B
-        Subsignal("dm", Pins("G13 C12 K13 J8 C23 F21 J23 N20"),
-            IOStandard("POD12")),
-
+        Subsignal("dm", Pins("G13 C12 K13 J8 C23 F21 J23 N20"), IOStandard("POD12")),
         # PL_DDR4_DQ(#)
         Subsignal("dq", Pins(
             "D14 A14 F14 F12 E14 H12 G14 H13", # 0 -> 7
@@ -127,19 +115,14 @@ _io = [
             "H23 G23 K24 G22 J21 H22 L24 H21", # 48 -> 55
             "L23 L20 L22 L21 M20 L19 M19 N19", # 56 -> 63
            ), IOStandard("POD12")),
-
         # PL_DDR4_DQS(#)_T
         Subsignal("dqs_t", Pins("E13 C15 J14 H8 B22 D23 J20 K21 K22"), IOStandard("DIFF_POD12")),
-        
         # PL_DDR4_DQS(#)_C
         Subsignal("dqs_c", Pins("E12 B15 J13 G8 A22 D24 H20"), IOStandard("DIFF_POD12")),
-        
         # PL_DDR4_CKE
         Subsignal("cke", Pins("A16"), IOStandard("SSTL12")),
-
         # PL_DDR4_ODT
         Subsignal("odt", Pins("B19"), IOStandard("SSTL12")),
-
         # PL_DDR4_RESET_B
         Subsignal("reset_n", Pins("A17"), IOStandard("LVCMOS12")),
     ),
@@ -213,6 +196,9 @@ _io = [
 
 	# SFP_SI5382_CLK_IN_SEL
     ("sfp_si5382_in1_c", 0, Pins("E39"), IOStandard("LVCMOS18")),
+
+    # SFP_SI5382_CLK_IN_SEL
+    ("sfp_si5382_clk_in_sel", 0, Pins("E9"), IOStandard("LVCMOS18")),
 ]
 
 # Above each section is listed the format for how to Ctrl-F to that 
@@ -358,85 +344,6 @@ _connectors = [
         "LA33_N": "AH18",
         }
     ),
-
-    ("LPC", {
-
-        "GBTCLK0_M2C_P": "AA24",
-        "GBTCLK0_M2C_N": "AA25",
-        "LA01_CC_P": "W25",
-        "LA01_CC_N": "Y25",
-        "LA05_P": "V27",
-        "LA05_N": "V28",
-        "LA09_P": "V26",
-        "LA09_N": "W26",
-        "LA13_P": "AA20",
-        "LA13_N": "AB20",
-        "LA17_CC_P": "AA32",
-        "LA17_CC_N": "AB32",
-        "LA23_P": "AD30",
-        "LA23_N": "AD31",
-        "LA26_P": "AF33",
-        "LA26_N": "AG34",
-        "CLK0_M2C_P": "AA24",
-        "CLK0_M2C_N": "AA25",
-        "LA02_P": "AA22",
-        "LA02_N": "AB22",
-        "LA04_P": "U26",
-        "LA04_N": "U27",
-        "LA07_P": "V22",
-        "LA07_N": "V23",
-        "LA11_P": "V21",
-        "LA11_N": "W21",
-        "LA15_P": "AB25",
-        "LA15_N": "AB26",
-        "LA19_P": "AA29",
-        "LA19_N": "AB29",
-        "LA21_P": "AC33",
-        "LA21_N": "AD33",
-        "LA24_P": "AE32",
-        "LA24_N": "AF32",
-        "LA28_P": "V31",
-        "LA28_N": "W31",
-        "LA30_P": "Y31",
-        "LA30_N": "Y32",
-        "LA32_P": "W30",
-        "LA32_N": "Y30",
-        "LA06_P": "V29",
-        "LA06_N": "W29",
-        "LA10_P": "T22",
-        "LA10_N": "T23",
-        "LA14_P": "U21",
-        "LA14_N": "U22",
-        "LA18_CC_P": "AB30",
-        "LA18_CC_N": "AB31",
-        "LA27_P": "AG31",
-        "LA27_N": "AG32",
-        "CLK1_M2C_P": "AC31",
-        "CLK1_M2C_N": "AC32",
-        "LA00_CC_P": "W23",
-        "LA00_CC_N": "W24",
-        "LA03_P": "W28",
-        "LA03_N": "Y28",
-        "LA08_P": "U24",
-        "LA08_N": "U25",
-        "LA12_P": "AC22",
-        "LA12_N": "AC23",
-        "LA16_P": "AB21",
-        "LA16_N": "AC21",
-        "LA20_P": "AA34",
-        "LA20_N": "AB34",
-        "LA22_P": "AC34",
-        "LA22_N": "AD34",
-        "LA25_P": "AE33",
-        "LA25_N": "AF34",
-        "LA29_P": "U34",
-        "LA29_N": "V34",
-        "LA31_P": "V33",
-        "LA31_N": "W34",
-        "LA33_P": "W33",
-        "LA33_N": "Y33",
-        }
-    )
 ]
 
 
