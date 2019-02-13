@@ -181,6 +181,10 @@ _io = [
         Subsignal("n", Pins("G12")),
         IOStandard("LVDS"), Misc("DIFF_TERM_ADV=TERM_100")
     ),
+    ("gth_clk200", 0,
+        Subsignal("p", Pins("AD6")),
+        Subsignal("n", Pins("AD5"))
+    ),
 
     ("sfp", 0,
         Subsignal("txp", Pins("AN4")),
@@ -196,6 +200,13 @@ _io = [
         Subsignal("rxn", Pins("AM1"))
     ),
     ("sfp_tx_disable", 1, Pins("AM12"), IOStandard("LVCMOS33")),
+    # Master SATA connector J11
+    ("sata", 0,
+        Subsignal("txp", Pins("AL4")),
+        Subsignal("txn", Pins("AL3")),
+        Subsignal("rxp", Pins("AK2")),
+        Subsignal("rxn", Pins("AK1"))
+    ),
 
     # AD9154 DACs
     ("dac_refclk", 0,
@@ -281,7 +292,6 @@ _io = [
         Subsignal("rxn", Pins("P1")),
     ),
 
-    # repurposed for siphaser on the DRTIO satellite
     ("adc_sysref", 0,
         Subsignal("p", Pins("C11")),
         Subsignal("n", Pins("B11")),
