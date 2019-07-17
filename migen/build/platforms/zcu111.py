@@ -1,3 +1,5 @@
+import os
+
 from migen.build.generic_platform import *
 from migen.build.xilinx import XilinxPlatform, VivadoProgrammer
 
@@ -6,6 +8,9 @@ from migen.build.xilinx import XilinxPlatform, VivadoProgrammer
 # specfic pin set in the ZCU111.xdc file. Swappable parts are surrounded
 # by ().
 _io = [
+    # CPU_RESET
+    ("cpu_reset", 0, Pins("AF15"), IOStandard("LVCMOS18")),
+
 	# GPIO_LED_(#)_LS
 	("user_led", 0, Pins("AR13"), IOStandard("LVCMOS18")),
     ("user_led", 1, Pins("AP13"), IOStandard("LVCMOS18")),
@@ -16,22 +21,19 @@ _io = [
     ("user_led", 6, Pins("AN17"), IOStandard("LVCMOS18")),
     ("user_led", 7, Pins("AV15"), IOStandard("LVCMOS18")),
 
-    # CPU_RESET
-    ("cpu_reset", 0, Pins("AF15"), IOStandard("LVCMOS18")),
-
     # GPIO_SW_(direction)
     ("user_sw_c", 0, Pins("AW5"), IOStandard("LVCMOS18")),
     ("user_sw_n", 0, Pins("AW3"), IOStandard("LVCMOS18")),
     ("user_sw_s", 0, Pins("E8"), IOStandard("LVCMOS18")),
     ("user_sw_w", 0, Pins("AW6"), IOStandard("LVCMOS18")),
-    ("user_sw_e", 0, Pins("AWE"), IOStandard("LVCMOS18")),
+    ("user_sw_e", 0, Pins("AW4"), IOStandard("LVCMOS18")),
 
     # GPIO_DIP_SW(#)
     ("user_dip_sw", 0, Pins("AF16"), IOStandard("LVCMOS18")),
     ("user_dip_sw", 1, Pins("AF17"), IOStandard("LVCMOS18")),
     ("user_dip_sw", 2, Pins("AH15"), IOStandard("LVCMOS18")),
     ("user_dip_sw", 3, Pins("AH16"), IOStandard("LVCMOS18")),
-    ("user_dip_sw", 4, Pins("AN17"), IOStandard("LVCMOS18")),
+    ("user_dip_sw", 4, Pins("AH17"), IOStandard("LVCMOS18")),
     ("user_dip_sw", 5, Pins("AG17"), IOStandard("LVCMOS18")),
     ("user_dip_sw", 6, Pins("AJ15"), IOStandard("LVCMOS18")),
     ("user_dip_sw", 7, Pins("AJ16"), IOStandard("LVCMOS18")),
@@ -392,7 +394,7 @@ _connectors = [
         "SYNC_M2C_N": "AV12",
         "SYNC_M2C_P": "AU12",
 
-        # FMCP_HSPC_CLK(#)_M2C_(M/P)     IOSTANDARD : LVDS
+        # FMCP_HSPC_CLK(#)_M2LEDNDARD : LVDS
         "CLK0_M2C_P": "AN10",
         "CLK0_M2C_N": "AP10",
         "CLK1_M2C_P": "AP20",
@@ -484,12 +486,31 @@ _connectors = [
 
 
 class Platform(XilinxPlatform):
-    default_clk_name = "clk125"
-    default_clk_period = 8.0
+    default_clk_name = "clk100"
+    default_clk_period = 10.0
 
     def __init__(self):
-        XilinxPlatform.__init__(self, "xzcu28dr-ffvg1517-2-e", _io, _connectors,
-            toolchain="vivado")
+        XilinxPlatform.__init__(self, "xczu28dr-ffvg1517-2-e", _io, _connectors, toolchain="vivado")
+        # crowbar project command to add BOARD_PART in order to avoid IP warnings/errors upon import
+        self.toolchain.project_commands = ["set_property BOARD_PART xilinx.com:zcu111:part0:1.1 [current_project]"]
+    
+    # Traverse path and add all ip files
+    def add_ip_dir(self, path):
+        dir_files = []
+        for root, dirs, files in os.walk(path):
+            for filename in files:
+                dir_files.append(os.path.join(root, filename))
+        for filename in dir_files:
+            ext = filename.split('.')[-1]
+            if ext == "xci" or "coe":
+                self.add_ip(filename)
+
+    def add_base_tcl(self, tcl_path, build_dir="build", build_name="top"):
+        self.toolchain.project_commands += ["source {}".format(tcl_path)]
+        self.toolchain.project_commands += ["generate_target all [get_files \"./{}/{}.srcs/sources_1/bd/base/base.bd\"]".format(build_dir, build_name)]
+        self.toolchain.project_commands += ["make_wrapper -files [get_files ./{}.srcs/sources_1/bd/base/base.bd] -top".format(build_name)]
+        self.toolchain.project_commands += ["add_files -norecurse ./{}.srcs/sources_1/bd/base/hdl/base_wrapper.v".format(build_name)]
+        self.toolchain.project_commands += ["update_compile_order -fileset sources_1"]
 
     def create_programmer(self):
         return VivadoProgrammer()
